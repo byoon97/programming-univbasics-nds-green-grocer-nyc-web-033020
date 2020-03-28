@@ -30,7 +30,15 @@ end
 def apply_coupons(cart, coupons)
   coupons.each do |coupon|
     item_info = find_item_by_name_in_collection(coupon[:item], cart)
+<<<<<<< HEAD
 	  if item_info and item_info[:count] >= coupon[:num]
+=======
+	  item_w_coupon = find_item_by_name_in_collection(coupon[:item]+" W/COUPON", cart)
+    if item_w_coupon and item_info[:count] >= coupon[:num]
+	    item_w_coupon[:count] += coupon[:num]
+	    item_info[:count] -= coupon[:num]
+	  elsif item_info and item_info[:count] >= coupon[:num]
+>>>>>>> 9110aa53b050f31a56bdaa6e96372f34e16307fa
       cart << {
         :item => coupon[:item] + " W/COUPON",
         :price => (coupon[:cost]/coupon[:num]).round(2),
@@ -40,6 +48,10 @@ def apply_coupons(cart, coupons)
       item_info[:count] -= coupon[:num]
     end #if
   end #each
+<<<<<<< HEAD
+=======
+  #cart.delete_if{|item_info| item_info[:count] <= 0}
+>>>>>>> 9110aa53b050f31a56bdaa6e96372f34e16307fa
   cart
 end
 
@@ -47,8 +59,13 @@ def apply_clearance(cart)
   cart.each do |item_info|
     if item_info[:clearance]
       item_info[:price] *= 0.8
+<<<<<<< HEAD
     end
   end
+=======
+    end #if
+  end #each
+>>>>>>> 9110aa53b050f31a56bdaa6e96372f34e16307fa
   cart
 end
 
